@@ -11,7 +11,7 @@ const path         = require('path');
 
 
 mongoose
-  .connect('mongodb://localhost/ironhack-project2', {useNewUrlParser: true})
+  .connect('mongodb://localhost/Project2-DB', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })

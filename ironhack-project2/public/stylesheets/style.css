@@ -1,0 +1,30 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a {
+  color: #00B7FF; }
+
+.about {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }
+
+.overview {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between; }
+
+.container {
+  display: flex;
+  flex-flow: column; }
+
+#overview-img {
+  height: 250px;
+  width: auto; }
+
+.overview-btn {
+  display: flex;
+  justify-content: center;
+  padding: 30px; }
+
+/*# sourceMappingURL=style.css.map */

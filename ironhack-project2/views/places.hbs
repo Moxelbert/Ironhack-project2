@@ -1,0 +1,12 @@
+<h1>List of Haunted Places</h1>
+<div class="overview">
+    {{#each places}} 
+    <div class="container">
+    <a href='/places/{{this._id}}'>{{this.name}}</a>
+       <img src="{{this.imgURL}}" alt="{{this.name}}" id="overview-img">
+    </div>
+    {{/each}}
+  </div>
+  <div class="overview-btn">
+      <button type="button" class="btn btn-dark btn-primary btn-lg" style="background-color:brown;"><a style="color: black;" href="/newPlace"> Add haunted place to the Lexicanum</a></button>
+  </div>
