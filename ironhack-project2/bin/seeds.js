@@ -9,6 +9,7 @@ mongoose.connect(`mongodb://localhost/${projectDB}`);
 const users = [
   {
   name: 'Moritz',
+  password: '1Boruss!a',
   description: 'Passionate medium with excellent connections to the other side.' 
   }
 ]
