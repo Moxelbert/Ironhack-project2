@@ -1,7 +1,7 @@
 const express = require("express");
 const router  = express.Router();
 
-const User = require('../models/User.js');
+// const User = require('../models/User.js');
 const Ghost = require('../models/Ghost.js');
 const Place = require('../models/Place.js');
 
@@ -18,8 +18,8 @@ router.get('/signup', (req, res, next) => {
   res.render('signup');
 });
 
-router.get('/login', (req, res, next) => {
-  res.render('login');
+router.get('/auth/login', (req, res, next) => {
+  res.render('auth/login');
 });
 
 router.get('/phenomenas', (req, res, next) => {
@@ -71,10 +71,10 @@ router.post('/newGhost', (req, res) => {
   let imageURL = req.body.imageURL;
   let description = req.body.description;
   let isDangerous = req.body.isDangerous;
-  let createdByUser = createdByUser;
+  let createdByUser = req.user;
   // let spottedByUser = spottedByUser; 
   // let spottedAtPlace = req.body.spottedAtPlace;
-  const newGhost = new Ghost({name, imageURL, description, isDangerous, createdByUser, spottedByUser, spottedAtPlace})
+  const newGhost = new Ghost({name, imageURL, description, isDangerous, createdByUser})
   newGhost.save()
     .then(ghost => {
     console.log('New ghost:', ghost);

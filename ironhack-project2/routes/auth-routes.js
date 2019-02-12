@@ -1,6 +1,7 @@
 const express = require('express');
 const authRoutes = express.Router();
 const passport = require("passport");
+const flash        = require("connect-flash");
 
 const User = require('../models/User.js')
 const bcrypt = require("bcrypt");
@@ -60,13 +61,14 @@ authRoutes.get("/signup", (req, res, next) => {
     passReqToCallback: true
   }));
   
-  authRoutes.get("/private-page", ensureLogin.ensureLoggedIn(), (req, res) => {
-    res.render("private", { user: req.user });
-  });
-
+  
   authRoutes.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/login");
+  });
+  
+  authRoutes.get("/private-page", ensureLogin.ensureLoggedIn(), (req, res) => {
+    res.render("private", { user: req.user });
   });
 
   module.exports = authRoutes;

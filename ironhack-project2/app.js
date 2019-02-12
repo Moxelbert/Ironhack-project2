@@ -1,5 +1,5 @@
-require('dotenv').config();
-
+const passport     = require("passport");
+const flash        = require("connect-flash");
 const bodyParser   = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express      = require('express');
@@ -8,12 +8,15 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
-const flash = require("connect-flash");
+const User         = require('./models/User.js');
+const session      = require("express-session");
+const bcrypt       = require("bcrypt");
+const LocalStrategy = require("passport-local").Strategy;
 
-// const User = require('../models/User.js');
+require('dotenv').config();
 
 mongoose
-  .connect('mongodb://localhost/Project2-DB', {useNewUrlParser: true})
+.connect('mongodb://localhost/Project2-DB', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -33,7 +36,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Express View engine setup
-
 app.use(require('node-sass-middleware')({
   src:  path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
@@ -47,21 +49,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
-
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
-
-
 
 const index = require('./routes/index');
 app.use('/', index);
 const authRoutes = require("./routes/auth-routes");
 app.use('/', authRoutes);
 
-const session = require("express-session");
-const bcrypt = require("bcrypt");
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
 
 app.use(session({
   secret: "our-passport-local-strategy-app",
@@ -83,9 +78,8 @@ passport.deserializeUser((id, cb) => {
 app.use(flash());
 passport.use(new LocalStrategy({
   passReqToCallback: true
-}, (req, username, password, next) => {
-  User.findOne({ username }, (err, user) => {
-
+}, (req, user, password, next) => {
+  User.findOne({ user }, (err, user) => {
     if (err) {
       return next(err);
     }
