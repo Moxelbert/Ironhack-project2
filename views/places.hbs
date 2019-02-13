@@ -12,13 +12,19 @@
       href="/places/newPlace"> Add haunted place to the Lexicanum</a></button>
 </div>
 
+<hr>
+{{places}}
+<hr>
+
+<div id="map"></div>
+
 <script>
   mapboxgl.accessToken = 'pk.eyJ1IjoiYS1idXJkZXR0IiwiYSI6ImNqcnQ4Y29rNzByZjU0M252Zzhwcms1ZmEifQ.MHWhxIcofrG90BNJvRTjXg';
   var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11',
+    style: 'mapbox://styles/mapbox/dark-v9',
     zoom: 8,
-    center: [2.3354096, 48.8744289]
+    center: [2, 2]
   });
 
   // Add a marker
@@ -26,10 +32,10 @@
     color: 'purple',
     draggable: true
   })
-    .setLngLat([13.411026, 52.5219216])
+    .setLngLat([1, 1])
     .addTo(map);
 
-  // If we can use navigator.geolocation in this browser
+  // If we can use navigator.geolocation in this browser STORING COORDINATES HOW??????
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(position => {
       let lng = position.coords.longitude
@@ -43,10 +49,8 @@
     })
   }
 
-  let coordinates = [
+  let coords = [
     { lng: -3.7004502, lat: 40.3925362 },
-    { lng: 2.3354096, lat: 48.8744289 },
-    { lng: 2.1881167, lat: 41.3977391 },
   ]
   var newGhosts = []
 
@@ -59,4 +63,48 @@
     newGhosts.push(newMarker)
   }
 
-</script>
+map.on('load', function () {
+map.addLayer({
+'id': '3d-buildings',
+'source': 'composite',
+'source-layer': 'building',
+'filter': ['==', 'extrude', 'true'],
+'type': 'fill-extrusion',
+'minzoom': 15,
+'paint': {
+'fill-extrusion-color': '#aaa',
+ 
+// use an 'interpolate' expression to add a smooth transition effect to the
+// buildings as the user zooms in
+'fill-extrusion-height': [
+"interpolate", ["linear"], ["zoom"],
+15, 0,
+15.05, ["get", "height"]
+],
+'fill-extrusion-base': [
+"interpolate", ["linear"], ["zoom"],
+15, 0,
+15.05, ["get", "min_height"]
+],
+'fill-extrusion-opacity': .6
+}
+}, labelLayerId);
+});
+
+
+map.on('load', function(e) {
+  // Add the data to your map as a layer
+  map.addLayer({
+    id: 'locations',
+    type: 'symbol',
+    // Add a GeoJSON source containing place coordinates and information.
+    source: {
+      type: 'geojson',
+      data: stores
+    },
+    layout: {
+      'icon-image': 'restaurant-15',
+      'icon-allow-overlap': true,
+    }
+  });
+});

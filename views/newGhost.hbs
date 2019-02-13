@@ -3,27 +3,22 @@
 <form action="/newGhost" method="post">
   <label for="">name:</label>
   <input type="text" name="name">
-
+<br>
   <label for="">image:</label>
   <input type="text" name="imageURL">
-
+<br>
   <label for="">description:</label>
   <input type="text" name="description">
-
+<br>
 <div class="form-check">
   <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
   <label class="form-check-label" for="defaultCheck1">
   Did it attack you?</label>
-
-  <label for="">where did you spot it?</label>
-  <input type="text" name="spottedAtPlace">
-  
+<br>
   <button type="submit">Add to Lexicanum</button>
 </form>
 
 <br>
-
-
 {{!-- 
 add a location search bar  --}}
 <form action="/newGhost" method="post">
@@ -32,9 +27,41 @@ add a location search bar  --}}
   <select name="name">
     <option value="name">Description</option>
   </select>
-  <br>
+  {{!-- <br>
   Longitude: <input required type="number" step="any" name="lng"><br>
   Latitude: <input required type="number" step="any" name="lat"><br>
-  <button>Add Sighting</button>
+  <button>Add Sighting</button> --}}
 </form>
 
+<label class="col-2 col-form-label pt-3">Where did you see it?</label>
+<div id='geocoder' class='geocoder' value="{{ghost.location}}"></div>
+
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet'
+  href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.css' type='text/css' />
+<style>
+  .mapboxgl-ctrl-geocoder {
+    min-width: 50%;
+  }
+</style>
+<div id='map'></div>
+
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoiZnJkMjZ4IiwiYSI6ImNqcnQ4ZGFzMjF4dDA0M3BzOWg4NGNlem4ifQ.SgF_HKYViz0-nlirZ9Ksag';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v9',
+    center: [-79.4512, 43.6568],
+    zoom: 13
+  });
+
+  var geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken
+  });
+  
+  document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+  document.getElementById('geocoder').firstChild.childNodes[1].setAttribute("name", 'location')
+  document.getElementById('geocoder').firstChild.childNodes[1].value = `{{event.location}}`
+
+
+</script>
