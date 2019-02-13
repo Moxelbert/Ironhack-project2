@@ -1,8 +1,9 @@
 <h1>{{ghost.name}}</h1>
+
 <img src="{{ghost.imgURL}}" alt="{{ghost.name}}" id="overview-img">
 <p>History: {{ghost.description}}</p>
 <p>Were users attacked by the {{ghost.name}}: {{ghost.isDangerous}}</p>
-<p>This phenomenon first appeared to user: {{ghost.createdByUser}}</p>
+<p>This phenomenon first appeared to user: {{ghost.createdByUser.username}}</p>
 <p>This phenomenon following users had an encounter with this ghost: {{ghost.spottedByUser}}</p>
 <p>{{ghost.spottedAtPlace}}</p>
 
