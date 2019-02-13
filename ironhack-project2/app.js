@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const passport     = require("passport");
 const flash        = require("connect-flash");
 const bodyParser   = require('body-parser');
@@ -12,8 +14,8 @@ const User         = require('./models/User.js');
 const session      = require("express-session");
 const bcrypt       = require("bcrypt");
 const LocalStrategy = require("passport-local").Strategy;
+const MongoStore = require('connect-mongo')(session);
 
-require('dotenv').config();
 
 mongoose
 .connect('mongodb://localhost/Project2-DB', {useNewUrlParser: true})
@@ -52,16 +54,11 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
 
-const index = require('./routes/index');
-app.use('/', index);
-const authRoutes = require("./routes/auth-routes");
-app.use('/', authRoutes);
-
-
 app.use(session({
   secret: "our-passport-local-strategy-app",
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new MongoStore( { mongooseConnection: mongoose.connection }) // Save the session in the database
 }));
 
 passport.serializeUser((user, cb) => {
@@ -78,8 +75,9 @@ passport.deserializeUser((id, cb) => {
 app.use(flash());
 passport.use(new LocalStrategy({
   passReqToCallback: true
-}, (req, user, password, next) => {
-  User.findOne({ user }, (err, user) => {
+}, (req, username, password, next) => {
+  
+  User.findOne({ username }, (err, user) => {
     if (err) {
       return next(err);
     }
@@ -96,5 +94,11 @@ passport.use(new LocalStrategy({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+const index = require('./routes/index');
+app.use('/', index);
+const authRoutes = require("./routes/auth-routes");
+app.use('/', authRoutes);
+
 
 module.exports = app;

@@ -4,6 +4,8 @@ const router  = express.Router();
 // const User = require('../models/User.js');
 const Ghost = require('../models/Ghost.js');
 const Place = require('../models/Place.js');
+const { checkConnected } = require('../config/middlewares')
+
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -14,13 +16,6 @@ router.get('/about', (req, res, next) => {
   res.render('about');
 });
 
-router.get('/signup', (req, res, next) => {
-  res.render('signup');
-});
-
-router.get('/auth/login', (req, res, next) => {
-  res.render('auth/login');
-});
 
 router.get('/phenomenas', (req, res, next) => {
   Ghost.find()
@@ -44,12 +39,16 @@ router.get('/places', (req, res, next) => {
   })
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/phenomenas/:id', (req, res, next) => {
   Ghost.findOne({'_id': req.params.id})
   .then(ghost => {
     res.render('ghostDetails', {ghost: ghost});
   })
 })
+
+router.get('/places/newPlace', checkConnected, (req, res, next) => {
+  res.render('newPlace');
+});
 
 router.get('/places/:id', (req, res, next) => {
   Place.findOne({'_id': req.params.id})
@@ -60,10 +59,6 @@ router.get('/places/:id', (req, res, next) => {
 
 router.get('/phenomenas/newGhost', (req, res, next) => {
   res.render('newGhost');
-});
-
-router.get('/places/newPlaces', (req, res, next) => {
-  res.render('newPlace');
 });
 
 router.post('/newGhost', (req, res) => {
