@@ -1,10 +1,11 @@
+require('dotenv').config();
+
 const mongoose = require('mongoose');
 const Ghost = require('../models/Ghost');
 const User = require('../models/User');
 const Place = require('../models/Place');
 
-const projectDB = 'Project2-DB';
-mongoose.connect(`mongodb://localhost/${projectDB}`);
+mongoose.connect(process.env.MONGODB_URI);
 
 const users = [
   {

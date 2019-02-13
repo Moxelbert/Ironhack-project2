@@ -67,6 +67,7 @@ authRoutes.post("/login", passport.authenticate("local", {
 authRoutes.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/login");
+  console.log(req.user)
 });
 
 authRoutes.get("/private-page", ensureLogin.ensureLoggedIn(), (req, res) => {

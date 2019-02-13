@@ -14,11 +14,11 @@ const User         = require('./models/User.js');
 const session      = require("express-session");
 const bcrypt       = require("bcrypt");
 const LocalStrategy = require("passport-local").Strategy;
-const MongoStore = require('connect-mongo')(session);
+const MongoStore    = require('connect-mongo')(session);
 
 
 mongoose
-.connect('mongodb://localhost/Project2-DB', {useNewUrlParser: true})
+.connect(process.env.MONGODB_URI, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -99,6 +99,8 @@ const index = require('./routes/index');
 app.use('/', index);
 const authRoutes = require("./routes/auth-routes");
 app.use('/', authRoutes);
+
+
 
 
 module.exports = app;
