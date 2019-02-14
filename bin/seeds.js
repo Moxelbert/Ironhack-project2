@@ -12,27 +12,52 @@ console.log("a", process.env.MONGODB_URI);
 const users = [
   {
   username: 'Moritz',
-  password: '1Boruss!a',
-  description: 'Passionate medium with excellent connections to the other side.' 
-  }
+  password: 'password',
+  imgURL: 'https://images.immediate.co.uk/volatile/sites/3/2017/09/bill-murray-cbd942a.jpg?quality=90&resize=768,574',
+  description: 'Passionate medium with excellent connections to the other side.', 
+  placesVisited: ['Aokigahara Forest'],
+  ghostsSeen: ['Headless Horseman', 'Flying Dutchman'],
+},
+{
+  username: 'Alex',
+  password: 'password',
+  imgURL: 'https://upload.wikimedia.org/wikipedia/en/3/37/Harold_Ramis_as_Egon_Spengler.jpg',
+  description: 'Paranormal guy', 
+  placesVisited: ['Capuchin Castle'],
+  ghostsSeen: ['Ghost of Anne Boleyn', 'Flying Dutchman'], 
+  },
+  {
+  username: 'Dr. Jürgen V.',
+  password: 'password',
+  imgURL: 'https://static.wixstatic.com/media/07909e_64885126da9e45f4a5d98e59fac5eec6~mv2_d_3714_4848_s_4_2.jpg/v1/crop/x_0,y_303,w_3714,h_2968/fill/w_478,h_382,al_c,q_80,usm_0.66_1.00_0.01/07909e_64885126da9e45f4a5d98e59fac5eec6~mv2_d_3714_4848_s_4_2.jpg',
+  description: 'Expert on everything', 
+  placesVisited: ['Had sex on every continent (including the Arctic)'],
+  ghostsSeen: ['Ghost of Anne Boleyn', 'Flying Dutchman'], 
+  }  
 ]
 const ghosts = [
   {
     name : "Headless Horsemen",
     imgURL: "https://cdn-images-1.medium.com/max/1600/0*VM9DRng0L84LcFHb.jpg",
     description: "The Headless Horseman is a mythical figure who has appeared in folklore around the world since at least the Middle Ages. The Headless Horseman is traditionally depicted as a man upon horseback who is missing his head. Depending on the legend, the Horseman is either carrying his head, or is missing his head altogether, and is searching for it.",
+    spottedByUser: ['Moritz', 'Alex'],
+    spottedAtPlace: ['Capuchin Castle'],
     isDangerous: true 
   },
   {
     name : "Ghost of Anne Boleyn",
     imgURL: "https://vignette.wikia.nocookie.net/pdsh/images/e/e6/Anne-boleyns-ghost.jpg/revision/latest/scale-to-width-down/250?cb=20131025181225",
     description: "Anne Boleyn was the 2nd wife of King Henry VIII of England and mother of Queen Elizabeth I. Henry had her beheaded on (probably/most likely) false accounts of treason in order to marry his third wife, Jane Seymour. A number of people have claimed to have seen Anne\'s ghost at Hever Castle, Blickling Hall, Salle Church, Tower of London, and Marwell Hall.",
+    spottedByUser: ['Alex'],
+    spottedAtPlace: ['Aokigahara Forest'],
     isDangerous: false
   },
   {
     name : "Flying Dutchman",
     imgURL: "https://vignette.wikia.nocookie.net/non-aliencreatures/images/f/fa/FlyingDutchman.jpg/revision/latest?cb=20170817022852",
     description: "The Flying Dutchman (Dutch: De Vliegende Hollander) is a legendary ghost ship that can never make port and is doomed to sail the oceans forever. The myth is likely to have originated from the 17th-century golden age of the Dutch East India Company (VOC). The oldest extant version has been dated to the late 18th century. Sightings in the 19th and 20th centuries reported the ship to be glowing with ghostly light. If hailed by another ship, the crew of the Flying Dutchman will try to send messages to land, or to people long dead. In ocean lore, the sight of this phantom ship is a portent of doom.",
+    spottedByUser: ['Alex, Moritz'],
+    spottedAtPlace: ['Aokigahara Forest', 'Čachtice Castle'],
     isDangerous: false
   }
 ];

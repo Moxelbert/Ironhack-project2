@@ -4,7 +4,7 @@ const router  = express.Router();
 const User = require('../models/User.js');
 const Ghost = require('../models/Ghost.js');
 const Place = require('../models/Place.js');
-const { checkConnected } = require('../config/middlewares')
+const {checkConnected} = require('../config/middlewares')
 
 
 /* GET home page */
@@ -13,7 +13,13 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/users', (req, res, next) => {
-  res.render('users');
+  User.find()
+  .then(users => {
+    res.render('users', {users: users});
+  })
+  .catch(error => {
+    console.log('Error while getting users from DB:', error);
+  })
 });
 
 router.get('/phenomenas', (req, res, next) => {
@@ -63,13 +69,14 @@ router.post('/newPlace', (req, res) => {
 });
 
 router.post('/newGhost', (req, res) => {
-  console.log("DEBUG checkbox", req.body.checkbox)
+  // console.log("DEBUG checkbox", req.body.checkbox)
   let name = req.body.name;
   let imageURL = req.body.imageURL;
   let description = req.body.description;
   let createdByUser = req.user._id; 
   let spottedAtPlace = req.body.spottedAtPlace;
   let isDangerous;
+  console.log(imageURL)
   if (req.body.checkbox == "on"){
     isDangerous = true
   } else {isDangerous = false}
@@ -101,6 +108,23 @@ router.get('/phenomenas/:id', (req, res, next) => {
   })
 })
 
+// router.post('/phenomenas/updateGhost/:id', (req, res) => {
+//   let update = req.user._id; 
+//   console.log('User ID is ',update )
+//   User.findOne({'_id': req.user._id})
+//   .then(user => {
+//     user = user.username;
+//     console.log(user);
+//     let ghostID = req.params.id;
+//     Ghost.findByIdAndUpdate(
+//       ghostID, 
+//       {$push: {'spottedByUser': user}})
+//       .then( _ => {
+//         res.redirect('../');
+//   })
+//   })
+// })
+
 router.post('/phenomenas/updateGhost/:id', (req, res) => {
   let update = req.user._id; 
   console.log('User ID is ',update )
@@ -113,10 +137,41 @@ router.post('/phenomenas/updateGhost/:id', (req, res) => {
       ghostID, 
       {$push: {'spottedByUser': user}})
       .then( _ => {
-        res.redirect('../');
+        Ghost.findOne({'_id': req.params.id})
+        .then(ghost => {
+          ghost = ghost.name;
+          console.log(ghost);
+          // let userID = user._id;
+          console.log(update);
+          User.findByIdAndUpdate(
+            update, 
+            {$push: {'ghostsSeen': ghost}})
+            .then( _ => {
+            res.redirect('../');
   })
   })
 })
+  })
+})
+
+
+// router.post('/places/updatePlace/:id', (req, res) => {
+//   let update = req.user._id; 
+//   console.log('User ID is ',update )
+//   User.findOne({'_id': req.user._id})
+//   .then(user => {
+//     user = user.username;
+//     console.log(user);
+//     let placeID = req.params.id;
+//     Place.findByIdAndUpdate(
+//       placeID, 
+//       {$push: {'visitedByUser': user}})
+//       .then( _ => {
+//         res.redirect('../');
+//   })
+//   })
+// })
+
 
 router.post('/places/updatePlace/:id', (req, res) => {
   let update = req.user._id; 
@@ -130,10 +185,23 @@ router.post('/places/updatePlace/:id', (req, res) => {
       placeID, 
       {$push: {'visitedByUser': user}})
       .then( _ => {
-        res.redirect('../');
+        Place.findOne({'_id': req.params.id})
+        .then(place => {
+          place = place.name;
+          console.log(place);
+          // let userID = user._id;
+          console.log(update);
+          User.findByIdAndUpdate(
+            update, 
+            {$push: {'placesVisited': place}})
+            .then( _ => {
+            res.redirect('../');
   })
   })
 })
+  })
+})
+
   
 
 module.exports = router;
