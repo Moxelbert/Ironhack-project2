@@ -40,24 +40,22 @@ router.get('/places', (req, res, next) => {
 });
 
 router.post('/places/newPlace', checkConnected, (req, res, next) => {
-let {location} = req.body
+let {location,name, description} = req.body
+console.log('TCL: location', location)
+console.log(req.body,"WE ARE HERE NOW")
   mapbox(
     process.env.MAPBOX_KEY,
-    `${location}`,
+    location,
     function (err, data) {
+			console.log('TCL: data', )
       const newPlace = new Place({
+        name, 
+        description, 
         location: {
-          type: {
-          type: String, 
-          enum: ['Point'],
-          default: 'Point',
-      }, 
-        coordinates: {
-         type: [Number],
-         required: true
+          coordinates: data.features[0].center,
         }
-      }
       });
+      console.log("THIS ARE THE VALUES", newPlace)
       newPlace
         .save()
         .then(event => {

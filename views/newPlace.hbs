@@ -2,11 +2,9 @@
 <h2>You've seen a ghost, please log it's location so we can monitor their movements</h2>
 
 <form action='/places/newPlace' method="post">
-  Ghost: 
   {{!-- Will define a req.body.ghost --}}
-  <select name="name">
-    <option value="description">Description</option>
-  </select>
+  Name: <input class="form-control" type="text" name="name">
+  Description: <textarea class="form-control" name="description" cols="30" rows="10"></textarea>
   <br>
   <label class="col-2 col-form-label pt-3">Where did you see it?</label>
 <div id='geocoder' class='geocoder' value=""></div>
