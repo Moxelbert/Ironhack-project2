@@ -25,6 +25,3 @@ const placeSchema = new Schema({
 
 const Place = mongoose.model("Place", placeSchema);
 module.exports = Place;
-
-// store coordinates as a polygon
-// have them appear on the map

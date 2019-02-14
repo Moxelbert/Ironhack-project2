@@ -31,8 +31,12 @@ router.get('/places', (req, res, next) => {
   console.log('test')
   Place.find()
   .then(places => {
-    console.log('success!!!!!!!!!!!!!', places);
-    res.render('places', {places: places});
+    console.log(places)
+    let coordinates = []
+    for (let i in places){
+      coordinates.push(places[i].location.coordinates)
+    }
+    res.render('places', {places: places, coordinates});
   })
   .catch(error => {
     console.log('Error while getting ghosts from DB:', places);

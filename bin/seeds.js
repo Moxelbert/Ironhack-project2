@@ -5,7 +5,7 @@ const Ghost = require('../models/Ghost');
 const User = require('../models/User');
 const Place = require('../models/Place');
 
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect("mongodb://localhost/Project2-DB", {useNewUrlParser: true})
 
 const users = [
   {
@@ -41,19 +41,32 @@ const places = [
     name : "Čachtice Castle",
     imgURL: "https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzL1Nsb3Zha2lhX0NhY2h0aWNlX2hyYWRfMi5KUEciXSxbInAiLCJ0aHVtYiIsIngzOTA-Il0sWyJwIiwiY29udmVydCIsIi1xdWFsaXR5IDgxIC1hdXRvLW9yaWVudCJdXQ/Slovakia_Cachtice_hrad_2.jpg",
     description: "Čachtice Castle is a castle ruin in Slovakia next to the village of Čachtice. It stands on a hill featuring rare plants, and has been declared a national nature reserve for this reason. The castle was a residence and later the prison of the Countess Elizabeth Báthory, who is alleged to have been the world's most prolific female serial killer",  
+    location : {
+      type: "Point",
+      coordinates: [52,13]
+    }
   },
   {
     name : "Aokigahara Forest",
     imgURL: "https://s24193.pcdn.co/wp-content/uploads/2017/06/Entity-Suicide-Forest.jpg",
-    description: "Long associated with the ghosts of the dead in Japanese literature and folklore, this forest on hardened lava became known in recent years as “the suicide forest.” Signs at some trailheads now advertise help-line information to hikers."  
-
+    description: "Long associated with the ghosts of the dead in Japanese literature and folklore, this forest on hardened lava became known in recent years as “the suicide forest.” Signs at some trailheads now advertise help-line information to hikers.",
+    location : {
+      type: "Point",
+      coordinates: [52,13]
+    }
   },
  { 
   name : "Capuchin Castle",
   imgURL: "https://i.pinimg.com/originals/26/93/e6/2693e6ebc756e6e38a6c323302083f82.jpg",
   description: "Mummies of more than 2,000 individuals lie within the catacombs of this Sicilian monastery, many dressed to reflect the station they held in life. Initially reserved exclusively for the burial of religious officials, it was later expanded to include noblemen and the families of wealthy benefactors—like the young Rosalia Lombardo, called the “Sleeping Beauty” for her impeccably-preserved remains.",
+  location : {
+    type: "Point",
+    coordinates: [52,13]
   }
+}
 ];
+
+
 
 User.deleteMany()
 .then(successCallback => {

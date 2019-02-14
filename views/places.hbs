@@ -1,3 +1,5 @@
+{{!--  TODO loop through coordinates and add markers to map --}}
+
 <h1>List of Haunted Places</h1>
 <div class="overview">
   {{#each places}}
@@ -106,12 +108,14 @@ map.addLayer({
 }
 });
 });
+</script>
 
+<script>
 
 map.on('load', function() {
 map.loadImage('/Ironhack-project2/public/images/ioe9w1ndqpac (1).png', function(error, image) {
 if (error) throw error;
-map.addImage('cat', image);
+map.addImage('/Ironhack-project2/public/images/ioe9w1ndqpac (1).png', image);
 map.addLayer({
 "id": "points",
 "type": "symbol",
@@ -141,12 +145,7 @@ map.addLayer({
 
 
 <script>
-  var marker = new mapboxgl.Marker({
-  color: 'red',
-  draggable: true
-})
-  .setLngLat([13.411026,52.5219216])
-  .addTo(map);
+
 
 // If we can use navigator.geolocation in this browser
 if (navigator.geolocation) {
@@ -161,5 +160,28 @@ if (navigator.geolocation) {
       .addTo(map)
   })
 }
+
+
+let coordinates3 = [{{coordinates}}]
+
+console.log(coordinates3.length)
+
+var ironhackMarkers = []
+
+for (let i = 0; i < coordinates3.length; i += 2) {
+
+  let lng = coordinates3[i]
+  let lat = coordinates3[i+1]
+  console.log("lang",lng)
+  console.log("lati",lat)
+  
+  let newMarker = new mapboxgl.Marker({
+    color: 'peru'
+  })
+    .setLngLat([lng,lat])
+    .addTo(map)
+  ironhackMarkers.push(newMarker)
+}
+setTimeout(function(){  }, 1000);
 
 </script> 
