@@ -7,17 +7,17 @@ const placeSchema = new Schema({
   description: String,
   createdByUser: { type: Schema.Types.ObjectId, ref: 'User'},
   visitedByUser: { type: Array, default: [] },
-  location: {
-    type: {
-    type: String, 
-    enum: ['Point'],
-    default: 'Point',
-}, 
-  coordinates: {
-   type: [Number],
-   required: true
-  }
-}
+//   location: {
+//     type: {
+//     type: String, 
+//     enum: ['Point'],
+//     default: 'Point',
+// }, 
+//   coordinates: {
+//    type: [Number],
+//    required: true
+//   }
+// }
 });
 
 const Place = mongoose.model('Place', placeSchema);

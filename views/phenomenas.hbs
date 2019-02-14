@@ -1,13 +1,14 @@
-<div class="overview">
+<h1 style="text-align:center;margin-top:20px;font-family: Baskerville;font-style: italic;font-weight:bold; color:red;">These monsters really exists</h1>
+<h3 style="text-align:center;font-family: Baskerville;font-style: italic;font-weight:bold;color:red;">(we've seen them...)</h3>
+<div class="overview"style="text-align:center;margin-top:20px;font-family: Baskerville;font-style: italic;font-weight:bold">
     {{#each phenomenas}} 
-    <div class="container" style="text-align:center;">
-    <a href='/phenomenas/{{this._id}}' style="color:#adad85; font-weight: bold;font-size:24px;">{{this.name}}</a>
-       <img src="{{this.imgURL}}" alt="{{this.name}}" id="overview-img" style="border-radius: 70%;height:200px; width:200px;" >
+    <div style="text-align:center;">
+    <div><a href='/phenomenas/{{this._id}}' style="color:#adad85; font-weight: bold;font-size:24px;">{{this.name}}</a></div>
+       <img src="{{this.imgURL}}" alt="{{this.name}}" style="border-radius: 70%;height:300px; width:300px;" >
     </div>
     {{/each}}
   </div>
   <div class="overview-btn">
       <button type="button" class="btn btn-dark btn-primary btn-lg" style="background-color:brown;"><a style="color: black;" href="/phenomenas/newGhost"> Add phenomenom to the Lexicanum</a></button>
   </div>
-
       

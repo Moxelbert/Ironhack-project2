@@ -1,3 +1,4 @@
+<div>
 <h1>{{ghost.name}}</h1>
 <img src="{{ghost.imgURL}}" alt="{{ghost.name}}" style="height: 300px;width: auto;">
 <p>History: {{ghost.description}}</p>
@@ -8,13 +9,10 @@
   <button type="button"></button>
 </div>
 <form action="/phenomenas/updateGhost/{{ghost._id}}" method="post">
-  <button type="submit"> Please click if you have met {{ghost.name}} already!</button>
+  <button type="button" class="btn btn-dark btn-primary btn-lg" style="background-color:brown;color: black;" type="submit"> Please click if you have met {{ghost.name}} already!</button>
 </form>
-
-
-
-
-
+</div>
+<!--
 <img src="{{ghost.imgURL}}" alt="{{ghost.name}}" id="overview-img">
 <p>History: {{ghost.description}}</p>
 <p>Were users attacked by the {{ghost.name}}: {{ghost.isDangerous}}</p>

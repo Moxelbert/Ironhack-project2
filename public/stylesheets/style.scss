@@ -19,9 +19,11 @@ a {
 
 .overview {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   justify-content: space-evenly;
   align-items: baseline;
+  text-align: center;
+
 }
 
 .container {
@@ -31,7 +33,7 @@ a {
 
 #overview-img {
   height: 250px;
-  width: auto;
+  width: 400px;
 }
 
 .overview-btn {
@@ -40,14 +42,20 @@ a {
   padding: 30px;
 }
 
-<<<<<<< HEAD
 #loginbtn {
   display: flex;
   flex-wrap: row nowrap;
   justify-content: flex-end;
 }
-=======
 #map {
   height: 400px;
 }
->>>>>>> 3a820a14f7880c63802a76c5932715eef2f69149
+
+.ghostDetails {
+  background: url(../images/ghost.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+

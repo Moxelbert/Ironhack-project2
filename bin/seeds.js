@@ -14,7 +14,7 @@ mongoose.connect(process.env.MONGODB_URI);
 
 const users = [
   {
-  username: 'moritz',
+  username: 'Moritz',
   password: bcrypt.hashSync("password", bcrypt.genSaltSync(bcryptSalt)),
   imgURL: 'https://images.immediate.co.uk/volatile/sites/3/2017/09/bill-murray-cbd942a.jpg?quality=90&resize=768,574',
   description: 'Passionate medium with excellent connections to the other side.', 
@@ -22,7 +22,7 @@ const users = [
   ghostsSeen: ['Headless Horseman', 'Flying Dutchman'],
 },
 {
-  username: 'alex',
+  username: 'Alex',
   password: bcrypt.hashSync("password", bcrypt.genSaltSync(bcryptSalt)),
   imgURL: 'https://upload.wikimedia.org/wikipedia/en/3/37/Harold_Ramis_as_Egon_Spengler.jpg',
   description: 'Paranormal guy', 
@@ -62,6 +62,30 @@ const ghosts = [
     spottedByUser: ['Alex, Moritz'],
     spottedAtPlace: ['Aokigahara Forest', 'Čachtice Castle'],
     isDangerous: false
+  },
+  {
+    name : "Baba Yaga",
+    imgURL: "https://cdni.rbth.com/rbthmedia/images/all/2016/08/15/bilibin/bilibin2.jpg",
+    description: "In Slavic folklore, Baba Yaga is a supernatural being (or one of a trio of sisters of the same name) who appears as a deformed and/or ferocious-looking woman. Baba Yaga flies around in a mortar, wields a pestle, and dwells deep in the forest in a hut usually described as standing on chicken legs.",
+    spottedByUser: ['Dr. Jürgen V., Moritz'],
+    spottedAtPlace: ['Amityville'],
+    isDangerous: true
+  },
+  {
+    name : "Fet-Mats",
+    imgURL: "https://alchetron.com/cdn/fet-mats-9c1df7c6-6fe0-4063-87ae-f8666dfa757-resize-750.jpeg",
+    description: "Fet-Mats (\'Fat Mats\') (real name: Mats Israelsson) (died 1677) was a \'petrified man\' found in 1719. In 1719, miners in the Falun copper mine found an intact dead body in a water-filled, long-unused tunnel. When they brought the body to the surface, it was identified by his former fiancée, Margaret Olsdotter, as Fet-Mats Israelsson, who had disappeared 42 years earlier.",
+    spottedByUser: ['Dr. Jürgen V., Alex'],
+    spottedAtPlace: ['Palace of Linares'],
+    isDangerous: true
+  },
+  {
+    name : "Krampus",
+    imgURL: "https://f4.bcbits.com/img/a4190515217_10.jpg",
+    description: "In Central European folklore, Krampus is a horned, anthropomorphic figure described as \'half-goat, half-demon\',who, during the Christmas season, punishes children who have misbehaved, in contrast with Saint Nicholas, who rewards the well-behaved with gifts.",
+    spottedByUser: ['Alex, Moritz'],
+    spottedAtPlace: ['Eltz Castle'],
+    isDangerous: true
   }
 ];
 
@@ -83,7 +107,22 @@ const places = [
   name : "Capuchin Castle",
   imgURL: "https://i.pinimg.com/originals/26/93/e6/2693e6ebc756e6e38a6c323302083f82.jpg",
   description: "Mummies of more than 2,000 individuals lie within the catacombs of this Sicilian monastery, many dressed to reflect the station they held in life. Initially reserved exclusively for the burial of religious officials, it was later expanded to include noblemen and the families of wealthy benefactors—like the young Rosalia Lombardo, called the “Sleeping Beauty” for her impeccably-preserved remains.",
-  }
+  },
+  { 
+   name : "Amityville",
+   imgURL: "https://www.thewrap.com/wp-content/uploads/2016/11/Amityville-Horror-House.jpg",
+   description: "Amityville is a village in the town of Babylon in Suffolk County, New York, in the United States. In November 1974, Ronald DeFeo, Jr. shot all six members of his family at 112 Ocean Avenue. In December 1975 George and Kathy Lutz and Kathy's three children moved into the house, but left after twenty-eight days, claiming to have been terrorized by paranormal phenomena produced by the house.",
+   },
+   { 
+    name : "Eltz Castle",
+    imgURL: "https://img.fotocommunity.com/der-klassiker-burg-eltz-39339944-0299-4d18-a73a-84664d04b1e3.jpg?height=1080",
+    description: "This picturesque castle is still occupied by descendants of the original family, and they might not be the only ones that stuck around. Burg Eltz is one of few castles in Germany that has never been destroyed and its medieval atmosphere is said to cater to the dead as well as the living. Ghosts of medieval knights have been spotted still patrolling the castle.",
+    },
+    { 
+     name : "Palace of Linares",
+     imgURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Palacio_de_Linares_-_01.jpg/1024px-Palacio_de_Linares_-_01.jpg",
+     description: "Built between 1872 and 1890 for the Marquis of Linares José de Murga. According to legend this place is the most haunted in Spain. Supposedly, a little girl appears in the mansion, the Marquis fathered her with his sister and they murdered her in order to hide their incestuous relationship.",
+     }
 ];
 
 User.deleteMany()
