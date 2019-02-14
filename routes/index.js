@@ -5,7 +5,7 @@ const router  = express.Router();
 const Ghost = require('../models/Ghost.js');
 const Place = require('../models/Place.js');
 const { checkConnected } = require('../config/middlewares')
-
+const mapbox = require('../public/javascripts/geocode')
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -15,7 +15,6 @@ router.get('/', (req, res, next) => {
 router.get('/about', (req, res, next) => {
   res.render('about');
 });
-
 
 router.get('/phenomenas', (req, res, next) => {
   Ghost.find()
@@ -29,6 +28,7 @@ router.get('/phenomenas', (req, res, next) => {
 });
 
 router.get('/places', (req, res, next) => {
+  console.log('test')
   Place.find()
   .then(places => {
     console.log('success!!!!!!!!!!!!!', places);
@@ -39,13 +39,45 @@ router.get('/places', (req, res, next) => {
   })
 });
 
-router.get('/places/newPlace', checkConnected, (req, res, next) => {
+router.post('/places/newPlace', checkConnected, (req, res, next) => {
+let {location} = req.body
+  mapbox(
+    process.env.MAPBOX_KEY,
+    `${location}`,
+    function (err, data) {
+      const newPlace = new Place({
+        location: {
+          type: {
+          type: String, 
+          enum: ['Point'],
+          default: 'Point',
+      }, 
+        coordinates: {
+         type: [Number],
+         required: true
+        }
+      }
+      });
+      newPlace
+        .save()
+        .then(event => {
+          res.redirect("/Places");
+        })
+        .catch(err => console.log(err));
+      /*console.log(`LONG & LAT of ${address} `,data.features[0].center);*/
+    }
+  );
   res.render('newPlace');
 });
 
 router.get('/phenomenas/newGhost', (req, res, next) => {
   console.log('logged in as:', req.user.username)
   res.render('newGhost');
+});
+
+router.get('/places/newPlace', (req, res, next) => {
+  console.log('logged in as:', req.user.username)
+  res.render('newPlace');
 });
 
 router.post('/newGhost', (req, res) => {

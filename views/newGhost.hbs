@@ -34,7 +34,7 @@ add a location search bar  --}}
 </form>
 
 <label class="col-2 col-form-label pt-3">Where did you see it?</label>
-<div id='geocoder' class='geocoder' value="{{ghost.location}}"></div>
+<div id='geocoder' class='geocoder' value=""></div>
 
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.min.js'></script>
 <link rel='stylesheet'
@@ -61,7 +61,6 @@ add a location search bar  --}}
   
   document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
   document.getElementById('geocoder').firstChild.childNodes[1].setAttribute("name", 'location')
-  document.getElementById('geocoder').firstChild.childNodes[1].value = `{{event.location}}`
-
+  document.getElementById('geocoder').firstChild.childNodes[1].value = `{{location}}`
 
 </script>

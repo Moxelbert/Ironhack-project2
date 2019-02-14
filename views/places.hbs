@@ -12,58 +12,77 @@
       href="/places/newPlace"> Add haunted place to the Lexicanum</a></button>
 </div>
 
+<div class='sidebar pad2'>Listing</div>
+<div id='map' class='map pad2'>Map</div>
+
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
+  <div id='map' style='height: 500px;'></div>
+
 <hr>
 {{places}}
 <hr>
 
-<div id="map"></div>
-
 <script>
   mapboxgl.accessToken = 'pk.eyJ1IjoiYS1idXJkZXR0IiwiYSI6ImNqcnQ4Y29rNzByZjU0M252Zzhwcms1ZmEifQ.MHWhxIcofrG90BNJvRTjXg';
-  var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/dark-v9',
-    zoom: 8,
-    center: [2, 2]
-  });
+  
+let map = new mapbox
+var map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/streets-v11', 'mapbox://styles/mapbox/dark-v9', 
+  zoom: 8,
+  center: [2.3354096,48.8744289]
+});
 
-  // Add a marker
-  var marker = new mapboxgl.Marker({
-    color: 'purple',
-    draggable: true
-  })
-    .setLngLat([1, 1])
-    .addTo(map);
+// Add a marker
+var marker = new mapboxgl.Marker({
+  color: 'red',
+  draggable: true
+})
+  .setLngLat([13.411026,52.5219216])
+  .addTo(map);
 
-  // If we can use navigator.geolocation in this browser STORING COORDINATES HOW??????
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
-      let lng = position.coords.longitude
-      let lat = position.coords.latitude
-      map.setCenter([lng, lat])
-      let userMarker = new mapboxgl.Marker({
-        color: 'green'
-      })
-        .setLngLat([lng, lat])
-        .addTo(map)
+// If we can use navigator.geolocation in this browser
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(position => {
+    let lng = position.coords.longitude
+    let lat = position.coords.latitude
+    map.setCenter([lng,lat])
+    let userMarker = new mapboxgl.Marker({
+      color: 'green'
     })
-  }
-
-  let coords = [
-    { lng: -3.7004502, lat: 40.3925362 },
-  ]
-  var newGhosts = []
-
-  for (let i = 0; i < coordinates.length; i++) {
-    let newMarker = new mapboxgl.Marker({
-      color: '#32c3ff'
-    })
-      .setLngLat([coordinates[i].lng, coordinates[i].lat])
+      .setLngLat([lng,lat])
       .addTo(map)
-    newGhosts.push(newMarker)
-  }
+  })
+}
+</script>
 
-map.on('load', function () {
+<div id='map'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiYS1idXJkZXR0IiwiYSI6ImNqcnQ4Y29rNzByZjU0M252Zzhwcms1ZmEifQ.MHWhxIcofrG90BNJvRTjXg';
+var map = new mapboxgl.Map({
+style: 'mapbox://styles/mapbox/light-v9',
+center: [-74.0066, 40.7135],
+zoom: 15.5,
+pitch: 45,
+bearing: -17.6,
+container: 'map'
+});
+ 
+// The 'building' layer in the mapbox-streets vector source contains building-height
+// data from OpenStreetMap.
+map.on('load', function() {
+// Insert the layer beneath any symbol layer.
+var layers = map.getStyle().layers;
+ 
+var labelLayerId;
+for (var i = 0; i < layers.length; i++) {
+if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+labelLayerId = layers[i].id;
+break;
+}
+}
+ 
 map.addLayer({
 'id': '3d-buildings',
 'source': 'composite',
@@ -91,20 +110,32 @@ map.addLayer({
 }, labelLayerId);
 });
 
-
-map.on('load', function(e) {
-  // Add the data to your map as a layer
-  map.addLayer({
-    id: 'locations',
-    type: 'symbol',
-    // Add a GeoJSON source containing place coordinates and information.
-    source: {
-      type: 'geojson',
-      data: stores
-    },
-    layout: {
-      'icon-image': 'restaurant-15',
-      'icon-allow-overlap': true,
-    }
-  });
+ 
+map.on('load', function() {
+map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cat_silhouette.svg/400px-Cat_silhouette.svg.png', function(error, image) {
+if (error) throw error;
+map.addImage('cat', image);
+map.addLayer({
+"id": "points",
+"type": "symbol",
+"source": {
+"type": "geojson",
+"data": {
+"type": "FeatureCollection",
+"features": [{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [0, 0]
+}
+}]
+}
+},
+"layout": {
+"icon-image": "cat",
+"icon-size": 0.25
+}
 });
+});
+});
+</script>
