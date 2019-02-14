@@ -6,10 +6,12 @@ const User = require('../models/User');
 const Place = require('../models/Place');
 
 mongoose.connect(process.env.MONGODB_URI);
+console.log("a", process.env.MONGODB_URI);
+
 
 const users = [
   {
-  name: 'Moritz',
+  username: 'Moritz',
   password: '1Boruss!a',
   description: 'Passionate medium with excellent connections to the other side.' 
   }

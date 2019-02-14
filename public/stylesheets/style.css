@@ -18,7 +18,8 @@ a {
 .overview {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between; }
+  justify-content: space-evenly;
+  align-items: baseline; }
 
 .container {
   display: flex;
@@ -32,5 +33,10 @@ a {
   display: flex;
   justify-content: center;
   padding: 30px; }
+
+#loginbtn {
+  display: flex;
+  flex-wrap: row nowrap;
+  justify-content: flex-end; }
 
 /*# sourceMappingURL=style.css.map */

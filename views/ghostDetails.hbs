@@ -1,11 +1,19 @@
-<h1>{{ghost.name}}</h1>
-    <img src="{{ghost.imgURL}}" alt="{{ghost.name}}" id="overview-img">
+    <h1>{{ghost.name}}</h1>
+    <img src="{{ghost.imgURL}}" alt="{{ghost.name}}" style="height: 300px;width: auto;">
     <p>History: {{ghost.description}}</p>
     <p>Were users attacked by the {{ghost.name}}: {{ghost.isDangerous}}</p>
     <p>This phenomenon first appeared to user: {{ghost.createdByUser.username}}</p>
-    <p>This phenomenon following users had an encounter with this ghost: {{ghost.spottedByUser}}</p>
-    <p>{{ghost.spottedAtPlace}}</p>
-    
+    <p>Following users had an encounter with this ghost: {{ghost.spottedByUser}}</p>
+    <div class="overview-btn">
+      <button type="button" 
+  </div>
+
+  <form action="/phenomenas/updateGhost/{{ghost._id}}" method="post">
+<button type="submit"> Please click if you have met {{ghost.name}} already!</button>
+</form>
+
+  
+
    
 
  

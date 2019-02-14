@@ -1,9 +1,8 @@
-<h1>List of Ghosts</h1>
 <div class="overview">
     {{#each phenomenas}} 
-    <div class="container">
-    <a href='/phenomenas/{{this._id}}'>{{this.name}}</a>
-       <img src="{{this.imgURL}}" alt="{{this.name}}" id="overview-img">
+    <div class="container" style="text-align:center;">
+    <a href='/phenomenas/{{this._id}}' style="color:#adad85; font-weight: bold;font-size:24px;">{{this.name}}</a>
+       <img src="{{this.imgURL}}" alt="{{this.name}}" id="overview-img" style="border-radius: 70%;height:200px; width:200px;" >
     </div>
     {{/each}}
   </div>

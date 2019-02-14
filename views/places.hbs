@@ -1,8 +1,7 @@
-<h1>List of Haunted Places</h1>
 <div class="overview">
     {{#each places}} 
-    <div class="container">
-    <a href='/places/{{this._id}}'>{{this.name}}</a>
+    <div class="container" style="text-align:center;margin-top:20px;">
+    <a href='/places/{{this._id}}' style="color:#adad85; font-weight: bold;font-size:24px;">{{this.name}}</a>
        <img src="{{this.imgURL}}" alt="{{this.name}}" id="overview-img">
     </div>
     {{/each}}
