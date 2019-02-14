@@ -94,6 +94,18 @@ passport.use(new LocalStrategy({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// This middleware will be always executed when we go to a regular route
+app.use((req,res,next) => {
+  if (req.user) {
+    // Define a view variable "isConnected" to true. In any HBS, we can do {{isConnected}} ==> true
+    res.locals.isConnected = true
+  }
+  else {
+    res.locals.isConnected = false
+  }
+  next()
+})
+
 const index = require('./routes/index');
 app.use('/', index);
 const authRoutes = require("./routes/auth-routes");

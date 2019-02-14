@@ -18,7 +18,9 @@
 <body>
   <ul class="nav nav-pills navbar-inverse">
     <li><a href="/" style="color:brown">Home</a></li>
-    <li><a href="/signup" style="color:brown">Sign Up</a></li>
+    {{#unless isConnected}}
+      <li><a href="/signup" style="color:brown">Sign Up</a></li>
+    {{/unless}}
     <li role="presentation" class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" role="button" href="#" aria-haspopup="true"
         aria-expanded="false" style="color:brown">
@@ -30,7 +32,9 @@
       </ul>
     </li>
     <li><a href="/users" style="color:brown">Users</a></li>
+    {{#if isConnected}}
     <li><a href="/logout" style="color:brown">Logout</a></li>
+    {{/if}}
     </ul>
   {{{body}}}
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
