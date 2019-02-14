@@ -67,11 +67,14 @@ const places = [
     name : "Čachtice Castle",
     imgURL: "https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzL1Nsb3Zha2lhX0NhY2h0aWNlX2hyYWRfMi5KUEciXSxbInAiLCJ0aHVtYiIsIngzOTA-Il0sWyJwIiwiY29udmVydCIsIi1xdWFsaXR5IDgxIC1hdXRvLW9yaWVudCJdXQ/Slovakia_Cachtice_hrad_2.jpg",
     description: "Čachtice Castle is a castle ruin in Slovakia next to the village of Čachtice. It stands on a hill featuring rare plants, and has been declared a national nature reserve for this reason. The castle was a residence and later the prison of the Countess Elizabeth Báthory, who is alleged to have been the world's most prolific female serial killer",  
+    coordinates: [1,2,coordinates]
   },
   {
     name : "Aokigahara Forest",
     imgURL: "https://s24193.pcdn.co/wp-content/uploads/2017/06/Entity-Suicide-Forest.jpg",
     description: "Long associated with the ghosts of the dead in Japanese literature and folklore, this forest on hardened lava became known in recent years as “the suicide forest.” Signs at some trailheads now advertise help-line information to hikers."  
+    coordinates: [1,4,coordinates]
+
   },
  { 
   name : "Capuchin Castle",
