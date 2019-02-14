@@ -1,10 +1,15 @@
+<<<<<<< HEAD
 {{!--  TODO loop through coordinates and add markers to map --}}
 
 <h1>List of Haunted Places</h1>
 <div class="overview">
+=======
+<h1 style="text-align:center;margin-top:20px;font-family: Baskerville;font-style: italic;font-weight:bold; color:red;">Following places are certainly cursed</h1>
+<div class="overview" style="text-align:center;margin-top:20px;font-weight: bold">
+>>>>>>> 33c81957686f27ed7da8c9a36b5e0e298d134236
   {{#each places}}
-  <div class="container">
-    <a href='/places/{{this._id}}'>{{this.name}}</a>
+  <div style="text-align:center;margin-top:20px;">
+  <div><a href='/places/{{this._id}}' style="font-family: Baskerville;font-style: italic;color:#adad85; font-weight: bold;font-size:24px;">{{this.name}}</a></div>  
     <img src="{{this.imgURL}}" alt="{{this.name}}" id="overview-img">
   </div>
   {{/each}}
@@ -14,6 +19,10 @@
       href="/places/newPlace"> Add haunted place to the Lexicanum</a></button>
 </div>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 33c81957686f27ed7da8c9a36b5e0e298d134236
 <div class='sidebar pad2'>Listing</div>
 <div id='map' class='map pad2'>Map</div>
 
@@ -110,6 +119,7 @@ map.addLayer({
 });
 </script>
 
+<<<<<<< HEAD
 <script>
 
 map.on('load', function() {
@@ -146,6 +156,17 @@ map.addLayer({
 
 <script>
 
+=======
+
+
+<script>
+  var marker = new mapboxgl.Marker({
+  color: 'red',
+  draggable: true
+})
+  .setLngLat([13.411026,52.5219216])
+  .addTo(map);
+>>>>>>> 33c81957686f27ed7da8c9a36b5e0e298d134236
 
 // If we can use navigator.geolocation in this browser
 if (navigator.geolocation) {
@@ -160,6 +181,7 @@ if (navigator.geolocation) {
       .addTo(map)
   })
 }
+<<<<<<< HEAD
 
 
 let coordinates3 = [{{coordinates}}]
@@ -183,5 +205,7 @@ for (let i = 0; i < coordinates3.length; i += 2) {
   ironhackMarkers.push(newMarker)
 }
 setTimeout(function(){  }, 1000);
+=======
+>>>>>>> 33c81957686f27ed7da8c9a36b5e0e298d134236
 
 </script> 

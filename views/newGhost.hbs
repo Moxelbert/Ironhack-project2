@@ -1,23 +1,23 @@
 <h2>Add a new phenomenon</h2>
 
-<form action="/newGhost" method="post">
+<form action="/phenomenas/newGhost" method="post">
   <label for="">name:</label>
   <input type="text" name="name">
 <br>
   <label for="">image:</label>
-  <input type="text" name="imageURL">
+  <input type="text" name="imgURL">
 <br>
   <label for="">description:</label>
   <input type="text" name="description">
 <br>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+  <input class="form-check-input" type="checkbox" name="checkbox" id="defaultCheck1">
   <label class="form-check-label" for="defaultCheck1">
   Did it attack you?</label>
 <br>
   <button type="submit">Add to Lexicanum</button>
 </form>
-
+<!--
 <br>
 {{!-- 
 add a location search bar  --}}

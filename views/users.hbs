@@ -1,0 +1,13 @@
+<h1 style="text-align:center;margin-top:20px;font-family: Baskerville;font-style: italic;font-weight:bold; color:red;">Get in touch with other special people!</h1>
+<div class="overview" style="text-align:center;margin-top:20px;font-weight: bold">
+    {{#each users}} 
+    <div>
+    <div><a href='/users/{{this._id}}' style="color:#adad85; font-weight: bold;font-size:30px;font-family: Baskerville;font-style: italic;">{{this.username}}</a></div>
+       <img src="{{this.imgURL}}" alt="{{this.username}}" id="overview-img">
+     <div style="color:#adad85; font-weight: bold;font-size:18px;font-family: Baskerville;font-style: italic;"><p>Describes himself as: {{this.description}}</p>
+      <p>{{this.username}} has been to the following places: {{this.placesVisited}}</p>
+      <p>{{this.username}} has met the following ghosts: {{this.ghostsSeen}}</p></div> 
+      </div>
+    {{/each}}
+  </div>
+

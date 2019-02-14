@@ -1,4 +1,4 @@
-require('dotenv').config();
+  require('dotenv').config();
 
 const passport     = require("passport");
 const flash        = require("connect-flash");
@@ -17,8 +17,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const MongoStore    = require('connect-mongo')(session);
 
 
-mongoose
-.connect(process.env.MONGODB_URI, {useNewUrlParser: true})
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -95,12 +94,21 @@ passport.use(new LocalStrategy({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// This middleware will be always executed when we go to a regular route
+app.use((req,res,next) => {
+  if (req.user) {
+    // Define a view variable "isConnected" to true. In any HBS, we can do {{isConnected}} ==> true
+    res.locals.isConnected = true
+  }
+  else {
+    res.locals.isConnected = false
+  }
+  next()
+})
+
 const index = require('./routes/index');
 app.use('/', index);
 const authRoutes = require("./routes/auth-routes");
 app.use('/', authRoutes);
-
-
-
 
 module.exports = app;
