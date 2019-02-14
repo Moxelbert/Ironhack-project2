@@ -46,40 +46,47 @@ router.get('/places/newPlace', checkConnected, (req, res, next) => {
   res.render('newPlace');
 });
 
-router.get('/phenomenas/newGhost', (req, res, next) => {
-  console.log('logged in as:', req.user.username)
-  res.render('newGhost');
-});
+router.post('/places/newPlace', (req, res) => {
+  // // 2 different ways of writing the same content
+  // let name = req.body.name;
+  // let imageURL = req.body.imageURL;
+  // let description = req.body.description;
+  let { name,imageURL,description } = req.body
 
-router.post('/newPlace', (req, res) => {
-  let name = req.body.name;
-  let imageURL = req.body.imageURL;
-  let description = req.body.description;
   let createdByUser = req.user._id;
   const newPlace = new Place({name, imageURL, description, createdByUser})
   console.log("created by ", createdByUser)
   newPlace.save()
   .then(place => {
     console.log('New place:', place);
-    res.redirect('places');
+    res.redirect('/places');
   })
   .catch(error => {
     console.log(error);
   })
 });
 
-router.post('/newGhost', (req, res) => {
+router.get('/phenomenas/newGhost', (req, res, next) => {
+  console.log('logged in as:', req.user.username)
+  res.render('newGhost');
+});
+
+
+router.post('/phenomenas/newGhost', (req, res) => {
   // console.log("DEBUG checkbox", req.body.checkbox)
   let name = req.body.name;
   let imageURL = req.body.imageURL;
   let description = req.body.description;
   let createdByUser = req.user._id; 
   let spottedAtPlace = req.body.spottedAtPlace;
-  let isDangerous;
-  console.log(imageURL)
-  if (req.body.checkbox == "on"){
-    isDangerous = true
-  } else {isDangerous = false}
+  
+  // 2 ways to write the same thing
+  // let isDangerous;
+  // if (req.body.checkbox == "on"){
+  //   isDangerous = true
+  // } else {isDangerous = false}
+  let isDangerous = req.body.checkbox == "on"
+
   console.log("new value is now ", isDangerous)
   const newGhost = new Ghost({isDangerous, name, imageURL, description, createdByUser, spottedAtPlace})
   newGhost.save()
@@ -126,32 +133,32 @@ router.get('/phenomenas/:id', (req, res, next) => {
 // })
 
 router.post('/phenomenas/updateGhost/:id', (req, res) => {
-  let update = req.user._id; 
-  console.log('User ID is ',update )
-  User.findOne({'_id': req.user._id})
-  .then(user => {
-    user = user.username;
-    console.log(user);
-    let ghostID = req.params.id;
-    Ghost.findByIdAndUpdate(
-      ghostID, 
-      {$push: {'spottedByUser': user}})
-      .then( _ => {
-        Ghost.findOne({'_id': req.params.id})
-        .then(ghost => {
-          ghost = ghost.name;
-          console.log(ghost);
-          // let userID = user._id;
-          console.log(update);
-          User.findByIdAndUpdate(
-            update, 
-            {$push: {'ghostsSeen': ghost}})
-            .then( _ => {
-            res.redirect('../');
-  })
-  })
-})
-  })
+  let update = req.user._id;
+  console.log('User ID is ', update)
+  User.findOne({ '_id': req.user._id })
+    .then(user => {
+      user = user.username;
+      console.log(user);
+      let ghostID = req.params.id;
+      Ghost.findByIdAndUpdate(
+        ghostID,
+        { $push: { 'spottedByUser': user } })
+        .then(_ => {
+          Ghost.findOne({ '_id': req.params.id })
+            .then(ghost => {
+              ghost = ghost.name;
+              console.log(ghost);
+              // let userID = user._id;
+              console.log(update);
+              User.findByIdAndUpdate(
+                update,
+                { $push: { 'ghostsSeen': ghost } })
+                .then(_ => {
+                  res.redirect('../');
+                })
+            })
+        })
+    })
 })
 
 

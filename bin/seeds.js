@@ -4,23 +4,26 @@ const mongoose = require('mongoose');
 const Ghost = require('../models/Ghost');
 const User = require('../models/User');
 const Place = require('../models/Place');
+const bcrypt = require("bcrypt");
+
+const bcryptSalt = 10;
+
 
 mongoose.connect(process.env.MONGODB_URI);
-console.log("a", process.env.MONGODB_URI);
 
 
 const users = [
   {
-  username: 'Moritz',
-  password: 'password',
+  username: 'moritz',
+  password: bcrypt.hashSync("password", bcrypt.genSaltSync(bcryptSalt)),
   imgURL: 'https://images.immediate.co.uk/volatile/sites/3/2017/09/bill-murray-cbd942a.jpg?quality=90&resize=768,574',
   description: 'Passionate medium with excellent connections to the other side.', 
   placesVisited: ['Aokigahara Forest'],
   ghostsSeen: ['Headless Horseman', 'Flying Dutchman'],
 },
 {
-  username: 'Alex',
-  password: 'password',
+  username: 'alex',
+  password: bcrypt.hashSync("password", bcrypt.genSaltSync(bcryptSalt)),
   imgURL: 'https://upload.wikimedia.org/wikipedia/en/3/37/Harold_Ramis_as_Egon_Spengler.jpg',
   description: 'Paranormal guy', 
   placesVisited: ['Capuchin Castle'],
@@ -28,7 +31,7 @@ const users = [
   },
   {
   username: 'Dr. Jürgen V.',
-  password: 'password',
+  password: bcrypt.hashSync("password", bcrypt.genSaltSync(bcryptSalt)),
   imgURL: 'https://static.wixstatic.com/media/07909e_64885126da9e45f4a5d98e59fac5eec6~mv2_d_3714_4848_s_4_2.jpg/v1/crop/x_0,y_303,w_3714,h_2968/fill/w_478,h_382,al_c,q_80,usm_0.66_1.00_0.01/07909e_64885126da9e45f4a5d98e59fac5eec6~mv2_d_3714_4848_s_4_2.jpg',
   description: 'Expert on everything', 
   placesVisited: ['Had sex on every continent (including the Arctic)'],
@@ -67,13 +70,13 @@ const places = [
     name : "Čachtice Castle",
     imgURL: "https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzL1Nsb3Zha2lhX0NhY2h0aWNlX2hyYWRfMi5KUEciXSxbInAiLCJ0aHVtYiIsIngzOTA-Il0sWyJwIiwiY29udmVydCIsIi1xdWFsaXR5IDgxIC1hdXRvLW9yaWVudCJdXQ/Slovakia_Cachtice_hrad_2.jpg",
     description: "Čachtice Castle is a castle ruin in Slovakia next to the village of Čachtice. It stands on a hill featuring rare plants, and has been declared a national nature reserve for this reason. The castle was a residence and later the prison of the Countess Elizabeth Báthory, who is alleged to have been the world's most prolific female serial killer",  
-    coordinates: [1,2,coordinates]
+    coordinates: [1,2]
   },
   {
     name : "Aokigahara Forest",
     imgURL: "https://s24193.pcdn.co/wp-content/uploads/2017/06/Entity-Suicide-Forest.jpg",
-    description: "Long associated with the ghosts of the dead in Japanese literature and folklore, this forest on hardened lava became known in recent years as “the suicide forest.” Signs at some trailheads now advertise help-line information to hikers."  
-    coordinates: [1,4,coordinates]
+    description: "Long associated with the ghosts of the dead in Japanese literature and folklore, this forest on hardened lava became known in recent years as “the suicide forest.” Signs at some trailheads now advertise help-line information to hikers." ,
+    coordinates: [1,4]
 
   },
  { 
