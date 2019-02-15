@@ -71,7 +71,8 @@ router.get('/places/newPlace', (req, res, next) => {
 });
 
 router.post('/places/newPlaces', checkConnected, (req, res, next) => {
-  let {location,name, description} = req.body
+  let {location,name, imgURL, description} = req.body;
+  let createdByUser = req.user._id;
   console.log('TCL: location', location)
   console.log(req.body,"WE ARE HERE NOW")
     mapbox(
@@ -81,7 +82,9 @@ router.post('/places/newPlaces', checkConnected, (req, res, next) => {
         console.log('TCL: data', )
         const newPlace = new Place({
           name, 
+          imgURL,
           description, 
+          createdByUser,
           location: {
             coordinates: data.features[0].center,
           }
@@ -93,7 +96,7 @@ router.post('/places/newPlaces', checkConnected, (req, res, next) => {
             res.redirect("/Places");
           })
           .catch(err => console.log(err));
-        console.log(`LONG & LAT of ${address} `,data.features[0].center);
+        //console.log(`LONG & LAT of ${address} `,data.features[0].center);
       }
     );
     res.render('newPlace');
