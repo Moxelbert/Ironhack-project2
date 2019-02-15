@@ -95,58 +95,29 @@ const places = [
     name : "Čachtice Castle",
     imgURL: "https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzL1Nsb3Zha2lhX0NhY2h0aWNlX2hyYWRfMi5KUEciXSxbInAiLCJ0aHVtYiIsIngzOTA-Il0sWyJwIiwiY29udmVydCIsIi1xdWFsaXR5IDgxIC1hdXRvLW9yaWVudCJdXQ/Slovakia_Cachtice_hrad_2.jpg",
     description: "Čachtice Castle is a castle ruin in Slovakia next to the village of Čachtice. It stands on a hill featuring rare plants, and has been declared a national nature reserve for this reason. The castle was a residence and later the prison of the Countess Elizabeth Báthory, who is alleged to have been the world's most prolific female serial killer",  
-<<<<<<< HEAD
     location : {
       type: "Point",
       coordinates: [52,13]
     }
-=======
-    coordinates: [1,2]
->>>>>>> 33c81957686f27ed7da8c9a36b5e0e298d134236
   },
   {
     name : "Aokigahara Forest",
     imgURL: "https://s24193.pcdn.co/wp-content/uploads/2017/06/Entity-Suicide-Forest.jpg",
-<<<<<<< HEAD
     description: "Long associated with the ghosts of the dead in Japanese literature and folklore, this forest on hardened lava became known in recent years as “the suicide forest.” Signs at some trailheads now advertise help-line information to hikers.",
     location : {
       type: "Point",
       coordinates: [52,13]
     }
-=======
-    description: "Long associated with the ghosts of the dead in Japanese literature and folklore, this forest on hardened lava became known in recent years as “the suicide forest.” Signs at some trailheads now advertise help-line information to hikers." ,
-    coordinates: [1,4]
-
->>>>>>> 33c81957686f27ed7da8c9a36b5e0e298d134236
   },
  { 
   name : "Capuchin Castle",
   imgURL: "https://i.pinimg.com/originals/26/93/e6/2693e6ebc756e6e38a6c323302083f82.jpg",
   description: "Mummies of more than 2,000 individuals lie within the catacombs of this Sicilian monastery, many dressed to reflect the station they held in life. Initially reserved exclusively for the burial of religious officials, it was later expanded to include noblemen and the families of wealthy benefactors—like the young Rosalia Lombardo, called the “Sleeping Beauty” for her impeccably-preserved remains.",
-<<<<<<< HEAD
   location : {
     type: "Point",
     coordinates: [52,13]
   }
 }
-=======
-  },
-  { 
-   name : "Amityville",
-   imgURL: "https://www.thewrap.com/wp-content/uploads/2016/11/Amityville-Horror-House.jpg",
-   description: "Amityville is a village in the town of Babylon in Suffolk County, New York, in the United States. In November 1974, Ronald DeFeo, Jr. shot all six members of his family at 112 Ocean Avenue. In December 1975 George and Kathy Lutz and Kathy's three children moved into the house, but left after twenty-eight days, claiming to have been terrorized by paranormal phenomena produced by the house.",
-   },
-   { 
-    name : "Eltz Castle",
-    imgURL: "https://img.fotocommunity.com/der-klassiker-burg-eltz-39339944-0299-4d18-a73a-84664d04b1e3.jpg?height=1080",
-    description: "This picturesque castle is still occupied by descendants of the original family, and they might not be the only ones that stuck around. Burg Eltz is one of few castles in Germany that has never been destroyed and its medieval atmosphere is said to cater to the dead as well as the living. Ghosts of medieval knights have been spotted still patrolling the castle.",
-    },
-    { 
-     name : "Palace of Linares",
-     imgURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Palacio_de_Linares_-_01.jpg/1024px-Palacio_de_Linares_-_01.jpg",
-     description: "Built between 1872 and 1890 for the Marquis of Linares José de Murga. According to legend this place is the most haunted in Spain. Supposedly, a little girl appears in the mansion, the Marquis fathered her with his sister and they murdered her in order to hide their incestuous relationship.",
-     }
->>>>>>> 33c81957686f27ed7da8c9a36b5e0e298d134236
 ];
 
 

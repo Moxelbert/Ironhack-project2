@@ -12,11 +12,179 @@
   <link href='https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
   <div class="overview-btn">
       <button type="button" class="btn btn-dark btn-primary btn-lg" style="background-color:brown;"><a style="color: black;" href="/phenomenas/newGhost"> Add phenomenom to the Lexicanum</a></button>
-<<<<<<< HEAD
 </div>
 <div id='map' style='height: 500px;'></div>
 
-=======
-  </div>
-      
->>>>>>> 33c81957686f27ed7da8c9a36b5e0e298d134236
+<div class='sidebar pad2'>Listing</div>
+<div id='map' class='map pad2'>Map</div>
+
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
+  <div id='map' style='height: 500px;'></div>
+
+<div id='map'></div>
+<hr>
+{{places}}
+<hr>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiYS1idXJkZXR0IiwiYSI6ImNqcnQ4Y29rNzByZjU0M252Zzhwcms1ZmEifQ.MHWhxIcofrG90BNJvRTjXg';
+var map = new mapboxgl.Map({
+style: 'mapbox://styles/mapbox/dark-v9',
+center: [-74.0066, 40.7135],
+zoom: 15.5,
+pitch: 45,
+bearing: -17.6,
+container: 'map'
+});
+ 
+// The 'building' layer in the mapbox-streets vector source contains building-height
+// data from OpenStreetMap.
+map.on('load', function() {
+// Insert the layer beneath any symbol layer.
+var layers = map.getStyle().layers;
+ 
+var labelLayerId;
+for (var i = 0; i < layers.length; i++) {
+if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+labelLayerId = layers[i].id;
+break;
+}
+}
+ 
+map.addLayer({
+'id': '3d-buildings',
+'source': 'composite',
+'source-layer': 'building',
+'filter': ['==', 'extrude', 'true'],
+'type': 'fill-extrusion',
+'minzoom': 15,
+'paint': {
+'fill-extrusion-color': '#aaa',
+ 
+// use an 'interpolate' expression to add a smooth transition effect to the
+// buildings as the user zooms in
+'fill-extrusion-height': [
+"interpolate", ["linear"], ["zoom"],
+15, 0,
+15.05, ["get", "height"]
+],
+'fill-extrusion-base': [
+"interpolate", ["linear"], ["zoom"],
+15, 0,
+15.05, ["get", "min_height"]
+],
+'fill-extrusion-opacity': .6
+}
+}, labelLayerId);
+});
+</script>
+
+<script>
+ 
+map.on('load', function() {
+map.addLayer({
+'id': 'room-extrusion',
+'type': 'fill-extrusion',
+'source': {
+// GeoJSON Data source used in vector tiles, documented at
+// https://gist.github.com/ryanbaumann/a7d970386ce59d11c16278b90dde094d
+'type': 'geojson',
+'data': 'https://docs.mapbox.com/mapbox-gl-js/assets/indoor-3d-map.geojson'
+},
+'paint': {
+// See the Mapbox Style Specification for details on data expressions.
+// https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions
+ 
+// Get the fill-extrusion-color from the source 'color' property.
+'fill-extrusion-color': ['get', 'color'],
+ 
+// Get fill-extrusion-height from the source 'height' property.
+'fill-extrusion-height': ['get', 'height'],
+ 
+// Get fill-extrusion-base from the source 'base_height' property.
+'fill-extrusion-base': ['get', 'base_height'],
+ 
+// Make extrusions slightly opaque for see through indoor walls.
+'fill-extrusion-opacity': 0.5
+}
+});
+});
+</script>
+
+<script>
+
+map.on('load', function() {
+map.loadImage('/Ironhack-project2/public/images/ioe9w1ndqpac (1).png', function(error, image) {
+if (error) throw error;
+console.log(loadImage)
+map.addImage('/Ironhack-project2/public/images/ioe9w1ndqpac (1).png', image);
+console.log(addImage)
+map.addLayer({
+"id": "points",
+"type": "symbol",
+"source": {
+"type": "geojson",
+"data": {
+"type": "FeatureCollection",
+"features": [{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [0, 0]
+}
+}]
+}
+},
+"layout": {
+"icon-image": "cat",
+"icon-size": 0.25
+}
+});
+});
+});
+
+</script>
+
+
+
+<script>
+
+
+// If we can use navigator.geolocation in this browser
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(position => {
+    let lng = position.coords.longitude
+    let lat = position.coords.latitude
+    map.setCenter([lng,lat])
+    let userMarker = new mapboxgl.Marker({
+      color: 'green'
+    })
+      .setLngLat([lng,lat])
+      .addTo(map)
+  })
+}
+
+
+let coordinates3 = [{{coordinates}}]
+
+console.log(coordinates3.length)
+
+var ironhackMarkers = []
+
+for (let i = 0; i < coordinates3.length; i += 2) {
+
+  let lng = coordinates3[i]
+  let lat = coordinates3[i+1]
+  console.log("lang",lng)
+  console.log("lati",lat)
+  
+  let newMarker = new mapboxgl.Marker({
+    color: 'peru'
+  })
+    .setLngLat([lng,lat])
+    .addTo(map)
+  ironhackMarkers.push(newMarker)
+}
+setTimeout(function(){  }, 1000);
+
+</script> 

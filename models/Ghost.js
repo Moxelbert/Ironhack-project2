@@ -8,7 +8,17 @@ const ghostSchema = new Schema({
   isDangerous: { type: Boolean, default: false},
   createdByUser: { type: Schema.Types.ObjectId, ref: 'User'},
   spottedByUser: { type: Array, default: [] },
-  spottedAtPlace: { type: Array, default: [] } 
+  spottedAtPlace: { type: Array, default: [] },
+  location: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      default: "Point"
+    },
+    coordinates: {
+      type: [Number]
+    }
+  } 
 });
 
 const Ghost = mongoose.model('Ghost', ghostSchema);

@@ -35,7 +35,6 @@ router.get('/phenomenas', (req, res, next) => {
 router.get('/places', (req, res, next) => {
   console.log('test')
   Place.find()
-<<<<<<< HEAD
   .then(places => {
     console.log(places)
     let coordinates = []
@@ -47,17 +46,9 @@ router.get('/places', (req, res, next) => {
   .catch(error => {
     console.log('Error while getting ghosts from DB:', places);
   })
-=======
-    .then(places => {
-      res.render('places', { places: places });
-    })
-    .catch(error => {
-      console.log('Error while getting ghosts from DB:', places);
-    })
->>>>>>> 33c81957686f27ed7da8c9a36b5e0e298d134236
 });
 
-router.post('/places/newPlace', checkConnected, (req, res, next) => {
+router.post('/places', checkConnected, (req, res, next) => {
 let {location,name, description} = req.body
 console.log('TCL: location', location)
 console.log(req.body,"WE ARE HERE NOW")
@@ -111,7 +102,6 @@ router.get('/phenomenas/newGhost', (req, res, next) => {
   res.render('newGhost');
 });
 
-<<<<<<< HEAD
 router.get('/places/newPlace', (req, res, next) => {
   console.log('logged in as:', req.user.username)
   res.render('newPlace');
@@ -119,17 +109,12 @@ router.get('/places/newPlace', (req, res, next) => {
 
 router.post('/newGhost', (req, res) => {
   console.log("DEBUG reg.user", req.user._id)
-=======
-
-router.post('/phenomenas/newGhost', (req, res) => {
-  // console.log("DEBUG checkbox", req.body.checkbox)
->>>>>>> 33c81957686f27ed7da8c9a36b5e0e298d134236
   let name = req.body.name;
   let imgURL = req.body.imgURL;
   let description = req.body.description;
   let createdByUser = req.user._id;
   let spottedAtPlace = req.body.spottedAtPlace;
-
+  
   if (req.body.checkbox == "on") {
     isDangerous = true
   } else { isDangerous = false }
