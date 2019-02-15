@@ -7,23 +7,18 @@ const placeSchema = new Schema({
   description: String,
   createdByUser: { type: Schema.Types.ObjectId, ref: 'User'},
   visitedByUser: { type: Array, default: [] },
-//   location: {
-//     type: {
-//     type: String, 
-//     enum: ['Point'],
-//     default: 'Point',
-// }, 
-//   coordinates: {
-//    type: [Number],
-//    required: true
-//   }
-// }
+  location: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      default: "Point"
+    },
+    coordinates: {
+      type: [Number]
+    }
+  }
+  
 });
 
 const Place = mongoose.model('Place', placeSchema);
 module.exports = Place;
-
-
-// store coordinates as a polygon 
-// have them appear on the map
-

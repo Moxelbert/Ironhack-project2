@@ -2,7 +2,7 @@
 <h2>Add a haunted place</h2>
 
 <form action="/places/newPlace" method="post">
-  <label for="">name:</label>
+<!--  <label for="">name:</label>
   <input type="text" name="name">
 
   <label for="">image:</label>
@@ -11,22 +11,49 @@
   <label for="">description:</label>
   <input type="text" name="description">
 
+<!--
   <button type="submit">Add to Lexicanum</button>
-</form>
-
-<!---
-<h1>New Place</h1>
+-->
 <h2>You've seen a ghost, please log it's location so we can monitor their movements</h2>
 
-<form action="/newGhost" method="post">
-  Ghost: 
   {{!-- Will define a req.body.ghost --}}
-  <select name="name">
-    <option value="description">Description</option>
-  </select>
+  Name: <input class="form-control" type="text" name="name">
+  Description: <textarea class="form-control" name="description" cols="30" rows="10"></textarea>
   <br>
-  Longitude: <input required type="number" step="any" name="lng"><br>
-  Latitude: <input required type="number" step="any" name="lat"><br>
+  <label for="">image:</label>
+  <input type="text" name="imgURL">
+  <br>
+  <label class="col-2 col-form-label pt-3">Where did you see it?</label>
+<div id='geocoder' class='geocoder' value=""></div>
+  
   <button>Add Sighting</button>
 </form>
 
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet'
+  href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.css' type='text/css' />
+<style>
+  .mapboxgl-ctrl-geocoder {
+    min-width: 50%;
+  }
+</style>
+<div id='map'></div>
+
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoiZnJkMjZ4IiwiYSI6ImNqcnQ4ZGFzMjF4dDA0M3BzOWg4NGNlem4ifQ.SgF_HKYViz0-nlirZ9Ksag';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v9',
+    center: [-79.4512, 43.6568],
+    zoom: 13
+  });
+
+  var geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken
+  });
+  
+  document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+  document.getElementById('geocoder').firstChild.childNodes[1].setAttribute("name", 'location')
+  document.getElementById('geocoder').firstChild.childNodes[1].value = `{{location}}`
+
+</script>

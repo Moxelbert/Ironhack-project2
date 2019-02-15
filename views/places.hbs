@@ -12,7 +12,6 @@
       href="/places/newPlace"> Add haunted place to the Lexicanum</a></button>
 </div>
 
-
 <div class='sidebar pad2'>Listing</div>
 <div id='map' class='map pad2'>Map</div>
 
@@ -28,7 +27,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYS1idXJkZXR0IiwiYSI6ImNqcnQ4Y29rNzByZjU0M252Zzhwcms1ZmEifQ.MHWhxIcofrG90BNJvRTjXg';
 var map = new mapboxgl.Map({
 style: 'mapbox://styles/mapbox/dark-v9',
-center: [-74.0066, 40.7135],
+center: [6.4428, 51.1804],
 zoom: 15.5,
 pitch: 45,
 bearing: -17.6,
@@ -109,15 +108,42 @@ map.addLayer({
 });
 </script>
 
+<script>
+
+map.on('load', function() {
+map.loadImage('/Ironhack-project2/public/images/ioe9w1ndqpac (1).png', function(error, image) {
+if (error) throw error;
+map.addImage('/Ironhack-project2/public/images/ioe9w1ndqpac (1).png', image);
+map.addLayer({
+"id": "points",
+"type": "symbol",
+"source": {
+"type": "geojson",
+"data": {
+"type": "FeatureCollection",
+"features": [{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [0, 0]
+}
+}]
+}
+},
+"layout": {
+"icon-image": "cat",
+"icon-size": 0.25
+}
+});
+});
+});
+
+</script>
+
 
 
 <script>
-  var marker = new mapboxgl.Marker({
-  color: 'red',
-  draggable: true
-})
-  .setLngLat([13.411026,52.5219216])
-  .addTo(map);
+
 
 // If we can use navigator.geolocation in this browser
 if (navigator.geolocation) {
@@ -132,5 +158,28 @@ if (navigator.geolocation) {
       .addTo(map)
   })
 }
+
+
+let coordinates3 = [{{coordinates}}]
+
+console.log(coordinates3.length)
+
+var ironhackMarkers = []
+
+for (let i = 0; i < coordinates3.length; i += 2) {
+
+  let lng = coordinates3[i]
+  let lat = coordinates3[i+1]
+  console.log("lang",lng)
+  console.log("lati",lat)
+  
+  let newMarker = new mapboxgl.Marker({
+    color: 'peru'
+  })
+    .setLngLat([lng,lat])
+    .addTo(map)
+  ironhackMarkers.push(newMarker)
+}
+setTimeout(function(){  }, 1000);
 
 </script> 

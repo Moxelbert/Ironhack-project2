@@ -7,11 +7,10 @@
 <p>Following users had an encounter with this ghost: {{ghost.spottedByUser}}</p>
 <div class="overview-btn">
   <button type="button"></button>
-</div>
+
 <form action="/phenomenas/updateGhost/{{ghost._id}}" method="post">
-  <button type="button" class="btn btn-dark btn-primary btn-lg" style="background-color:brown;color: black;" type="submit"> Please click if you have met {{ghost.name}} already!</button>
-</form>
-</div>
+  <button type="submit"class="btn btn-dark btn-primary btn-lg" style="background-color:brown;color: black;" > Please click if you have met {{ghost.name}} already!</button>
+</form> 
 <!--
 <img src="{{ghost.imgURL}}" alt="{{ghost.name}}" id="overview-img">
 <p>History: {{ghost.description}}</p>

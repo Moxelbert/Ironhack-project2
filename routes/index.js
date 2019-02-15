@@ -32,25 +32,39 @@ router.get('/phenomenas', (req, res, next) => {
     })
 });
 
+// router.get('/places', (req, res, next) => {
+//   Place.find()
+//     .then(places => {
+//       res.render('places', { places: places });
+//     })
+//     .catch(error => {
+//       console.log('Error while getting ghosts from DB:', places);
+//     })
+// });
+
 router.get('/places', (req, res, next) => {
+  console.log('test')
   Place.find()
-    .then(places => {
-      res.render('places', { places: places });
-    })
-    .catch(error => {
-      console.log('Error while getting ghosts from DB:', places);
-    })
+  .then(places => {
+    console.log(places)
+    let coordinates = []
+    for (let i in places){
+      coordinates.push(places[i].location.coordinates)
+    }
+    res.render('places', {places: places, coordinates});
+  })
+  .catch(error => {
+    console.log('Error while getting ghosts from DB:', places);
+  })
 });
+
 
 router.get('/places/newPlace', checkConnected, (req, res, next) => {
   res.render('newPlace');
 });
 
 router.post('/places/newPlace', (req, res) => {
-  // // 2 different ways of writing the same content
-  // let name = req.body.name;
-  // let imageURL = req.body.imageURL;
-  // let description = req.body.description;
+ 
   let { name, imgURL, description } = req.body
 
   let createdByUser = req.user._id;
@@ -112,23 +126,6 @@ router.get('/phenomenas/:id', (req, res, next) => {
     })
 })
 
-// router.post('/phenomenas/updateGhost/:id', (req, res) => {
-//   let update = req.user._id; 
-//   console.log('User ID is ',update )
-//   User.findOne({'_id': req.user._id})
-//   .then(user => {
-//     user = user.username;
-//     console.log(user);
-//     let ghostID = req.params.id;
-//     Ghost.findByIdAndUpdate(
-//       ghostID, 
-//       {$push: {'spottedByUser': user}})
-//       .then( _ => {
-//         res.redirect('../');
-//   })
-//   })
-// })
-
 router.post('/phenomenas/updateGhost/:id', (req, res) => {
   let update = req.user._id;
   console.log('User ID is ', update)
@@ -159,24 +156,6 @@ router.post('/phenomenas/updateGhost/:id', (req, res) => {
 })
 
 
-// router.post('/places/updatePlace/:id', (req, res) => {
-//   let update = req.user._id; 
-//   console.log('User ID is ',update )
-//   User.findOne({'_id': req.user._id})
-//   .then(user => {
-//     user = user.username;
-//     console.log(user);
-//     let placeID = req.params.id;
-//     Place.findByIdAndUpdate(
-//       placeID, 
-//       {$push: {'visitedByUser': user}})
-//       .then( _ => {
-//         res.redirect('../');
-//   })
-//   })
-// })
-
-
 router.post('/places/updatePlace/:id', (req, res) => {
   let update = req.user._id;
   console.log('User ID is ', update)
@@ -205,7 +184,5 @@ router.post('/places/updatePlace/:id', (req, res) => {
         })
     })
 })
-
-
 
 module.exports = router;
