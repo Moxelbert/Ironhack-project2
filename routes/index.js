@@ -48,7 +48,7 @@ router.get('/places', (req, res, next) => {
   })
 });
 
-router.post('/places', checkConnected, (req, res, next) => {
+router.post('/places/newPlaces', checkConnected, (req, res, next) => {
 let {location,name, description} = req.body
 console.log('TCL: location', location)
 console.log(req.body,"WE ARE HERE NOW")
@@ -103,7 +103,7 @@ router.get('/phenomenas/newGhost', (req, res, next) => {
 });
 
 router.get('/places/newPlace', (req, res, next) => {
-  console.log('logged in as:', req.user.username)
+  console.log('logged in as:', req.user)
   res.render('newPlace');
 });
 
