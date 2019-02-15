@@ -99,7 +99,7 @@ router.post('/places/newPlaces', checkConnected, (req, res, next) => {
         //console.log(`LONG & LAT of ${address} `,data.features[0].center);
       }
     );
-    res.render('newPlace');
+    res.render('places');
   });
 
 
@@ -187,7 +187,7 @@ router.post('/phenomenas/updateGhost/:id', (req, res) => {
                 update,
                 { $push: { 'ghostsSeen': ghost } })
                 .then(_ => {
-                  res.render('phenomenas');
+                  res.redirect('/phenomenas');
                 })
             })
         })
@@ -217,7 +217,7 @@ router.post('/places/updatePlace/:id', (req, res) => {
                 update,
                 { $push: { 'placesVisited': place } })
                 .then(_ => {
-                  res.redirect('../');
+                  res.redirect('/places');
                 })
             })
         })

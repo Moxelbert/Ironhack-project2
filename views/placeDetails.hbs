@@ -1,9 +1,13 @@
-<h1>{{place.name}}</h1>
-    <img src="{{place.imgURL}}" alt="{{place.name}}" id="overview-img">
-    <p>History: {{place.description}}</p>
-    <p>This place was first visited by by user: {{place.createdByUser.username}}</p>
-    <p>Following users have visited this place: {{place.visitedByUser}}</p>
-
+<body style="text-align: center; background;background: url(../images/ghost.jpg) no-repeat center center fixed;-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;"> 
+<h1 style="font-family: Baskerville;font-style: italic;font-weight:bold; color:red;">{{place.name}}</h1>
+    <img src="{{place.imgURL}}" alt="{{place.name}}" id="overview-img" style="height:400px;width:auto;">
+    <p style="color:#adad85;font-family: Baskerville;font-style: italic; font-weight: bold;font-size:18px;">History: {{place.description}}</p>
+    <p style="color:#adad85;font-family: Baskerville;font-style: italic; font-weight: bold;font-size:18px;">This place was first visited by by user: {{place.createdByUser.username}}</p>
+    <p style="color:#adad85;font-family: Baskerville;font-style: italic; font-weight: bold;font-size:18px;">Following users have visited this place: {{place.visitedByUser}}</p>
 <form action="/places/updatePlace/{{place._id}}" method="post">
 <button type="submit"> Please click if you have been to {{place.name}}!</button>
 </form>
+</body> 

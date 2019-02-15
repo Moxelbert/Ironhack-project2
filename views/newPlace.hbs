@@ -1,5 +1,9 @@
+<body style="text-align: center; background;background: url(../images/ghost.jpg) no-repeat center center fixed;-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; font-family: Baskerville;font-style: italic; color:#adad85; font-weight: bold;font-size:21px;">
 
-<h2>Add a haunted place</h2>
+<h1 style="font-family: Baskerville;font-style: italic;font-weight:bold; color:red;">Add a haunted place</h2>
 
 <form action="/places/newPlaces" method="post">
 <!--  <label for="">name:</label>
@@ -14,7 +18,7 @@
 <!--
   <button type="submit">Add to Lexicanum</button>
 -->
-<h2>You've seen a ghost, please log it's location so we can monitor their movements</h2>
+<h3 style="font-family: Baskerville;font-style: italic;font-weight:bold; color:red;">Please also log it's location so we can monitor their movements</h2>
 
   {{!-- Will define a req.body.ghost --}}
   Name: <input class="form-control" type="text" name="name">
@@ -28,7 +32,7 @@
   
   <button>Add Sighting</button>
 </form>
-
+</body>
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.min.js'></script>
 <link rel='stylesheet'
   href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.css' type='text/css' />
