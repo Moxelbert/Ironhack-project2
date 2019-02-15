@@ -4,7 +4,9 @@ const router = express.Router();
 const User = require('../models/User.js');
 const Ghost = require('../models/Ghost.js');
 const Place = require('../models/Place.js');
-const { checkConnected } = require('../config/middlewares')
+const { checkConnected } = require('../config/middlewares');
+const mapbox = require('../public/javascripts/geocode')
+
 
 
 /* GET home page */
@@ -59,26 +61,60 @@ router.get('/places', (req, res, next) => {
 });
 
 
-router.get('/places/newPlace', checkConnected, (req, res, next) => {
+// router.get('/places/newPlace', checkConnected, (req, res, next) => {
+//   res.render('newPlace');
+// });
+
+router.get('/places/newPlace', (req, res, next) => {
+  console.log('logged in as:', req.user.username)
   res.render('newPlace');
 });
 
-router.post('/places/newPlace', (req, res) => {
- 
-  let { name, imgURL, description } = req.body
+router.post('/places/newPlaces', checkConnected, (req, res, next) => {
+  let {location,name, description} = req.body
+  console.log('TCL: location', location)
+  console.log(req.body,"WE ARE HERE NOW")
+    mapbox(
+      process.env.MAPBOX_KEY,
+      location,
+      function (err, data) {
+        console.log('TCL: data', )
+        const newPlace = new Place({
+          name, 
+          description, 
+          location: {
+            coordinates: data.features[0].center,
+          }
+        });
+        console.log("THIS ARE THE VALUES", newPlace)
+        newPlace
+          .save()
+          .then(event => {
+            res.redirect("/Places");
+          })
+          .catch(err => console.log(err));
+        console.log(`LONG & LAT of ${address} `,data.features[0].center);
+      }
+    );
+    res.render('newPlace');
+  });
 
-  let createdByUser = req.user._id;
-  const newPlace = new Place({ name, imgURL, description, createdByUser })
-  console.log("created by ", createdByUser)
-  newPlace.save()
-    .then(place => {
-      console.log('New place:', place);
-      res.redirect('/places');
-    })
-    .catch(error => {
-      console.log(error);
-    })
-});
+
+// router.post('/places/newPlace', (req, res) => {
+ 
+//   let { name, imgURL, description} = req.body;
+//   let createdByUser = req.user._id;
+//   const newPlace = new Place({ name, imgURL, description, createdByUser })
+//   console.log("created by ", createdByUser)
+//   newPlace.save()
+//     .then(place => {
+//       console.log('New place:', place);
+//       res.redirect('/places');
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     })
+// });
 
 router.get('/phenomenas/newGhost', (req, res, next) => {
   console.log('logged in as:', req.user.username)
@@ -148,7 +184,7 @@ router.post('/phenomenas/updateGhost/:id', (req, res) => {
                 update,
                 { $push: { 'ghostsSeen': ghost } })
                 .then(_ => {
-                  res.redirect('../');
+                  res.render('phenomenas');
                 })
             })
         })
