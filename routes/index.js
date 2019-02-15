@@ -93,13 +93,13 @@ router.post('/places/newPlaces', checkConnected, (req, res, next) => {
         newPlace
           .save()
           .then(event => {
-            res.redirect("/Places");
+            res.redirect("/places");
           })
           .catch(err => console.log(err));
         //console.log(`LONG & LAT of ${address} `,data.features[0].center);
       }
     );
-    res.render('places');
+    res.redirect('/places');
   });
 
 
